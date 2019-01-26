@@ -1,13 +1,15 @@
 import React from "react";
 import Form from "./form.jsx";
+import Commute from "./commute.jsx";
 import axios from "axios";
 
 class Calculator extends React.Component {
   state = {
     origin: "",
-    desintation: "",
+    destination: "",
     departureDate: "",
-    departureTime: 0
+    departureTime: 0,
+    commuteTime: null
   };
 
   handleOriginInput = e => {
@@ -18,7 +20,7 @@ class Calculator extends React.Component {
 
   handleDestinationInput = e => {
     this.setState({
-      desintation: e.target.value
+      destination: e.target.value
     });
   };
 
@@ -37,12 +39,14 @@ class Calculator extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     let { origin, destination, departureDate, departureTime } = this.state;
-    axios.post("http://localhost:3001/commute", {
-      origin: origin,
-      destination: destination,
-      departureDate: departure_date,
-      departureTime: departure_time
-    });
+    axios
+      .post("/commute", {
+        destination: destination,
+        origin: origin,
+        departureDate: departureDate,
+        departureTime: departureTime
+      })
+      .then(response => this.setState({ commuteTime: response.data }));
   };
 
   render() {
@@ -55,6 +59,9 @@ class Calculator extends React.Component {
           handleDateInput={this.handleDateInput}
           handleSubmit={this.handleSubmit}
         />
+        <div className="commute-container">
+          <Commute commuteTime={this.state.commuteTime} />
+        </div>
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from "react";
 
 const Form = props => (
-  <form action="http://localhost:3001/commute" method="post">
+  <form>
     <div className="origin-destination-container">
       Origin:{" "}
       <input type="text" name="origin" onChange={props.handleOriginInput} />
@@ -26,7 +26,7 @@ const Form = props => (
       />
     </div>
     <div className="button-container">
-      <button type="submit" name="submitButton">
+      <button name="submitButton" onClick={props.handleSubmit}>
         How fucked am I?
       </button>
     </div>
