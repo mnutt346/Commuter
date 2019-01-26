@@ -6,8 +6,8 @@ class Calculator extends React.Component {
   state = {
     origin: "",
     desintation: "",
-    departure_date: "",
-    departure_time: 0
+    departureDate: "",
+    departureTime: 0
   };
 
   handleOriginInput = e => {
@@ -24,26 +24,24 @@ class Calculator extends React.Component {
 
   handleTimeInput = e => {
     this.setState({
-      departure_time: e.target.value
+      departureTime: e.target.value
     });
   };
 
   handleDateInput = e => {
     this.setState({
-      departure_date: e.target.value
+      departureDate: e.target.value
     });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    let { origin, destination, departure_date, departure_time } = this.state;
+    let { origin, destination, departureDate, departureTime } = this.state;
     axios.post("http://localhost:3001/commute", {
-      data: {
-        origin: origin,
-        destination: destination,
-        departure_date: departure_date,
-        departure_time: departure_time
-      }
+      origin: origin,
+      destination: destination,
+      departureDate: departure_date,
+      departureTime: departure_time
     });
   };
 

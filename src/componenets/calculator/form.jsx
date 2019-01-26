@@ -16,17 +16,17 @@ const Form = props => (
       Departure time & date:{" "}
       <input
         type="time"
-        name="departure-time"
+        name="departureTime"
         onChange={props.handleTimeInput}
       />
       <input
         type="date"
-        name="departure-date"
+        name="departureDate"
         onChange={props.handleDateInput}
       />
     </div>
     <div className="button-container">
-      <button type="submit" name="submit-button">
+      <button type="submit" name="submitButton">
         How fucked am I?
       </button>
     </div>
