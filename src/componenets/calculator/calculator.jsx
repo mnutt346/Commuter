@@ -34,6 +34,19 @@ class Calculator extends React.Component {
     });
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+    let { origin, destination, departure_date, departure_time } = this.state;
+    axios.post("http://localhost:3001/commute", {
+      data: {
+        origin: origin,
+        destination: destination,
+        departure_date: departure_date,
+        departure_time: departure_time
+      }
+    });
+  };
+
   render() {
     return (
       <div className="calculator-container">
@@ -42,6 +55,7 @@ class Calculator extends React.Component {
           handleDestinationInput={this.handleDestinationInput}
           handleTimeInput={this.handleTimeInput}
           handleDateInput={this.handleDateInput}
+          handleSubmit={this.handleSubmit}
         />
       </div>
     );
