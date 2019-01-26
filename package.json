@@ -1,0 +1,24 @@
+{
+  "name": "commuter",
+  "version": "1.0.0",
+  "description": "Calculate commute your commute time.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mnutt346/Commuter.git"
+  },
+  "keywords": [
+    "maps",
+    "commuting",
+    "traffic"
+  ],
+  "author": "Michael Nutt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mnutt346/Commuter/issues"
+  },
+  "homepage": "https://github.com/mnutt346/Commuter#readme"
+}
