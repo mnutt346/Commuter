@@ -59,6 +59,9 @@ class Calculator extends React.Component {
           handleDateInput={this.handleDateInput}
           handleSubmit={this.handleSubmit}
         />
+        <div className="commute-time-header-container">
+          <div className="commute-time-header">Estimated Commute</div>
+        </div>
         <div className="commute-container">
           <Commute commuteTime={this.state.commuteTime} />
         </div>

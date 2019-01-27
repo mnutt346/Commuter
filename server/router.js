@@ -13,19 +13,21 @@ const getCommuteData = async queryString => {
   return await axios
     .get(queryString)
     .then(response => {
-      let commuteTime = response.data.routes[0].legs[0].duration.text;
+      //   console.log(response.data.routes[0].legs[0].duration_in_traffic.text);
+      let commuteTime =
+        response.data.routes[0].legs[0].duration_in_traffic.text;
       return commuteTime;
     })
-    .catch(err => console.log("Error in API request"));
+    .catch(err => console.log("Error in API request: ", err));
 };
 
-router.post("/commute", (req, res) => {
+router.post("/commute", async (req, res) => {
   let { origin, destination, departureTime, departureDate } = req.body;
   const departureTimeUnix = convertTime(departureDate, departureTime);
   let APIString = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&departure_time=${departureTimeUnix}&traffic_model=best_guess&key=${
     process.env.API_KEY
   }`;
-  getCommuteData(APIString).then(commuteTime => {
+  await getCommuteData(APIString).then(commuteTime => {
     res.send(commuteTime);
   });
 });
