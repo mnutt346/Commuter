@@ -12,27 +12,9 @@ class Calculator extends React.Component {
     commuteTime: null
   };
 
-  handleOriginInput = e => {
+  handleInput = e => {
     this.setState({
-      origin: e.target.value
-    });
-  };
-
-  handleDestinationInput = e => {
-    this.setState({
-      destination: e.target.value
-    });
-  };
-
-  handleTimeInput = e => {
-    this.setState({
-      departureTime: e.target.value
-    });
-  };
-
-  handleDateInput = e => {
-    this.setState({
-      departureDate: e.target.value
+      [e.target.name]: e.target.value
     });
   };
 
@@ -52,15 +34,9 @@ class Calculator extends React.Component {
   render() {
     return (
       <div className="calculator-container">
-        <Form
-          handleOriginInput={this.handleOriginInput}
-          handleDestinationInput={this.handleDestinationInput}
-          handleTimeInput={this.handleTimeInput}
-          handleDateInput={this.handleDateInput}
-          handleSubmit={this.handleSubmit}
-        />
+        <Form handleInput={this.handleInput} handleSubmit={this.handleSubmit} />
         <div className="commute-time-header-container">
-          <div className="commute-time-header">Estimated Commute</div>
+          <div className="commute-time-header">Estimated Commute Time</div>
         </div>
         <div className="commute-container">
           <Commute commuteTime={this.state.commuteTime} />
