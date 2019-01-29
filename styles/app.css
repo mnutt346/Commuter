@@ -50,6 +50,7 @@ input:-webkit-autofill:active {
   font-family: "Roboto Condensed", sans-serif;
   color: white;
   text-decoration: none;
+  text-shadow: 1.5px 1.5px 0px rgba(0, 0, 0, 0.2);
 }
 
 .nav-container a:hover {
@@ -99,6 +100,7 @@ input:-webkit-autofill:active {
   align-self: center;
   background-color: rgba(255, 255, 255, 0.719);
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 14px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 3%;
 }
 
 form {
