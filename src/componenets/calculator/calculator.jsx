@@ -9,6 +9,7 @@ class Calculator extends React.Component {
     destination: "",
     departureDate: "",
     departureTime: 0,
+    trafficModel: "best_guess",
     commuteTime: null
   };
 
@@ -18,21 +19,38 @@ class Calculator extends React.Component {
     });
   };
 
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
-    let { origin, destination, departureDate, departureTime } = this.state;
+    let {
+      origin,
+      destination,
+      departureDate,
+      departureTime,
+      trafficModel
+    } = this.state;
     Axios.post("/commute", {
       destination: destination,
       origin: origin,
       departureDate: departureDate,
-      departureTime: departureTime
+      departureTime: departureTime,
+      trafficModel: trafficModel
     }).then(response => this.setState({ commuteTime: response.data }));
   };
 
   render() {
     return (
       <div className="calculator-container">
-        <Form handleInput={this.handleInput} handleSubmit={this.handleSubmit} />
+        <Form
+          handleInput={this.handleInput}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        />
         <div className="commute-time-header-container">
           <div className="commute-time-header">Estimated Commute Time</div>
         </div>

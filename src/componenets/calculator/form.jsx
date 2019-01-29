@@ -12,6 +12,29 @@ const Form = props => (
       <input type="time" name="departureTime" onChange={props.handleInput} />
       <input type="date" name="departureDate" onChange={props.handleInput} />
     </div>
+    <div className="traffic-model-container">
+      <input
+        type="radio"
+        name="trafficModel"
+        value="best_guess"
+        onChange={props.handleChange}
+      />
+      <label htmlFor="best_guess">Best Guess</label>
+      <input
+        type="radio"
+        name="trafficModel"
+        value="optimistic"
+        onChange={props.handleChange}
+      />
+      <label htmlFor="optimistic">Optimistic</label>
+      <input
+        type="radio"
+        name="trafficModel"
+        value="pessimistic"
+        onChange={props.handleChange}
+      />
+      <label htmlFor="pesimistic">Pesimistic</label>
+    </div>
     <div className="button-container">
       <button name="submitButton" onClick={props.handleSubmit}>
         How bad is it?

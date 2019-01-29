@@ -22,9 +22,15 @@ const getCommuteData = async queryString => {
 };
 
 router.post("/commute", async (req, res) => {
-  let { origin, destination, departureTime, departureDate } = req.body;
+  let {
+    origin,
+    destination,
+    departureTime,
+    departureDate,
+    trafficModel
+  } = req.body;
   const departureTimeUnix = convertTime(departureDate, departureTime);
-  let APIString = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&departure_time=${departureTimeUnix}&traffic_model=best_guess&key=${
+  let APIString = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&departure_time=${departureTimeUnix}&traffic_model=${trafficModel}&key=${
     process.env.API_KEY
   }`;
   await getCommuteData(APIString).then(commuteTime => {

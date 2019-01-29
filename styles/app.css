@@ -108,7 +108,7 @@ form {
   flex-wrap: wrap;
   margin-top: 5%;
   width: 80%;
-  height: 22%;
+  height: 30%;
   justify-content: space-evenly;
   align-items: center;
   font-family: "Roboto Condensed", sans-serif;
@@ -141,6 +141,14 @@ input {
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+.traffic-model-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  height: 12%;
 }
 
 .button-container:hover {
