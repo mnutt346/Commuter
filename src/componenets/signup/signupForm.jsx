@@ -5,11 +5,12 @@ const SignUpForm = props => (
     <div className="sign-up-heading-containter">
       <h3 className="sign-up-heading">Sign Up</h3>
     </div>
-    Username <input type="text" name="Username" />
-    Password <input type="password" name="Password" />
-    <div className="button-container">
-      <button name="signUpButton">Sign Up</button>
-    </div>
+    Username <input type="text" name="username" onChange={props.handleInput} />
+    Password{" "}
+    <input type="password" name="password" onChange={props.handleInput} />
+    <button name="signUpButton" onClick={props.handleSignUp}>
+      Sign Up
+    </button>
   </form>
 );
 

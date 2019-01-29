@@ -14,7 +14,7 @@ const Form = props => (
     </div>
     <div className="button-container">
       <button name="submitButton" onClick={props.handleSubmit}>
-        How fucked am I?
+        How bad is it?
       </button>
     </div>
   </form>

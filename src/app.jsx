@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./componenets/header.jsx";
 import Calculator from "./componenets/calculator/calculator.jsx";
 import SignUp from "./componenets/signup/signup.jsx";
+import LogIn from "./componenets/login/login.jsx";
 import "../styles/app.css";
 
 const App = () => (
@@ -15,6 +16,7 @@ const App = () => (
           <Switch>
             <Route exact path="/" component={Calculator} />
             <Route path="/SignUp" component={SignUp} />
+            <Route path="/LogIn" component={LogIn} />
           </Switch>
         </div>
       </Router>

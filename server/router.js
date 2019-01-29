@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const passport = require("passport");
-const mongoose = require("mongoose");
-const userInfo = require("../database/models.js");
 require("dotenv").config();
 
 // ---------------------------- GET COMMUTE DATA ----------------------------
@@ -17,7 +14,6 @@ const getCommuteData = async queryString => {
   return await axios
     .get(queryString)
     .then(response => {
-      //   console.log(response.data.routes[0].legs[0].duration_in_traffic.text);
       let commuteTime =
         response.data.routes[0].legs[0].duration_in_traffic.text;
       return commuteTime;
@@ -35,17 +31,5 @@ router.post("/commute", async (req, res) => {
     res.send(commuteTime);
   });
 });
-
-// ---------------------------- POST LOGIN ----------------------------
-
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    successFlash: "Welcome!",
-    failureRedirect: "/login",
-    failureFlash: "Invalid username or password."
-  })
-);
 
 module.exports = router;

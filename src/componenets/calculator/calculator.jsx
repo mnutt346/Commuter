@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "./form.jsx";
 import Commute from "./commute.jsx";
-import axios from "axios";
+import Axios from "axios";
 
 class Calculator extends React.Component {
   state = {
@@ -21,14 +21,12 @@ class Calculator extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     let { origin, destination, departureDate, departureTime } = this.state;
-    axios
-      .post("/commute", {
-        destination: destination,
-        origin: origin,
-        departureDate: departureDate,
-        departureTime: departureTime
-      })
-      .then(response => this.setState({ commuteTime: response.data }));
+    Axios.post("/commute", {
+      destination: destination,
+      origin: origin,
+      departureDate: departureDate,
+      departureTime: departureTime
+    }).then(response => this.setState({ commuteTime: response.data }));
   };
 
   render() {
