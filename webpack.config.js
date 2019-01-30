@@ -3,8 +3,17 @@ module.exports = {
   output: {
     filename: "app.js",
     path: __dirname + "/dist",
-    publicPath: "/"
+    publicPath: "/dist/"
   },
+  devServer: {
+    publicPath: "/dist/",
+    historyApiFallback: true
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./dist/index.html"
+    })
+  ],
   module: {
     rules: [
       {

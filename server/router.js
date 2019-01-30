@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+
 require("dotenv").config();
 
-// ---------------------------- GET COMMUTE DATA ----------------------------
+// ---------------------------- POST COMMUTE DATA ----------------------------
 const convertTime = (date, time) => {
   let JSDate = new Date(`${date} ${time}`);
   let unixTime = Math.round(JSDate.getTime() / 1000);
@@ -36,6 +37,13 @@ router.post("/commute", async (req, res) => {
   await getCommuteData(APIString).then(commuteTime => {
     res.send(commuteTime);
   });
+});
+
+// ---------------------------- POST SIGN UP ----------------------------
+
+// ---------------------------- Catch All ----------------------------
+router.get("/*", (req, res) => {
+  res.redirect("/");
 });
 
 module.exports = router;

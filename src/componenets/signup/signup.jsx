@@ -3,15 +3,16 @@ import SignUpForm from "./signupForm.jsx";
 import Axios from "axios";
 
 class SignUp extends React.Component {
-  state = { username: "", password: "" };
+  state = { email: "", password: "" };
 
   handleInput = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSignUp = e => {
+  handleSubmit = e => {
     e.preventDefault();
-    let { username, password } = this.state;
+    let { email, password } = this.state;
+    console.log("email: ", email, " password: ", password);
     // Axios.post("/signup", {
     //   username: username,
     //   password: password
@@ -21,7 +22,10 @@ class SignUp extends React.Component {
   render() {
     return (
       <div className="calculator-container">
-        <SignUpForm />
+        <SignUpForm
+          handleInput={this.handleInput}
+          handleSubmit={this.handleSubmit}
+        />
       </div>
     );
   }
