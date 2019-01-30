@@ -5,10 +5,12 @@ const LoginForm = props => (
     <div className="log-in-heading-containter">
       <h3 className="log-in-heading">Log In</h3>
     </div>
-    Username <input type="text" name="username" onChange={props.handleInput} />
+    Email <input type="text" name="email" onChange={props.handleInput} />
     Password{" "}
     <input type="password" name="password" onChange={props.handleInput} />
-    <button name="logInButton">Sign Up</button>
+    <button name="logInButton" onClick={props.handleSubmit}>
+      Log In
+    </button>
   </form>
 );
 

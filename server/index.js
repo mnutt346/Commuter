@@ -29,7 +29,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-// require("./router.js")(passport);
+require("./authRoutes.js")(app, passport);
 
 const port = 3001;
 

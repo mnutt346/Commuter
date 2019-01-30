@@ -10,13 +10,11 @@ class SignUp extends React.Component {
   };
 
   handleSubmit = e => {
-    e.preventDefault();
     let { email, password } = this.state;
-    console.log("email: ", email, " password: ", password);
-    // Axios.post("/signup", {
-    //   username: username,
-    //   password: password
-    // });
+    Axios.post("/SignUp", {
+      email: email,
+      password: password
+    });
   };
 
   render() {

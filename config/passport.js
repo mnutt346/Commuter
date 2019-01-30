@@ -13,6 +13,8 @@ module.exports = passport => {
     });
   });
 
+  // ****************** Sign Up ******************
+
   passport.use(
     "local-signup",
     new LocalStrategy(
@@ -29,7 +31,7 @@ module.exports = passport => {
               return done(
                 null,
                 false,
-                req.flash("signupMessage", "That email is already taken.")
+                req.flash("That email is already taken.")
               );
             else {
               let newUserInfo = new userInfo();
@@ -42,6 +44,34 @@ module.exports = passport => {
               });
             }
           });
+        });
+      }
+    )
+  );
+
+  // ****************** Log In ******************
+  passport.use(
+    "local-login",
+    new LocalStrategy(
+      {
+        usernameField: "email",
+        passwordField: "password",
+        passReqToCallback: true
+      },
+      (req, email, password, done) => {
+        userInfo.findOne({ email: email }, (err, user) => {
+          if (err) return done(err);
+          // If no user found or password is invalid
+          if (!user)
+            return done(
+              null,
+              false,
+              req.flash("loginMessage", "Email or password was incorrect.")
+            );
+          if (!user.validPassword(password))
+            return done(null, false, console.log("Invalid Password"));
+          // Successful login
+          return done(null, user);
         });
       }
     )
