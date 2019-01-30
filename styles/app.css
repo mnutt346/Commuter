@@ -210,6 +210,10 @@ button {
   font-family: "Roboto Condensed", sans-serif;
 }
 
+.log-in-form {
+  height: 20%;
+}
+
 .log-in-heading-containter {
   display: flex;
   justify-content: center;

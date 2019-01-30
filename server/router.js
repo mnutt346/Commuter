@@ -40,8 +40,8 @@ router.post("/commute", async (req, res) => {
 });
 
 // ---------------------------- Catch All ----------------------------
-router.get("/*", (req, res) => {
-  res.redirect("/");
-});
+// router.get("/*", (req, res) => {
+//   res.redirect("/");
+// });
 
 module.exports = router;

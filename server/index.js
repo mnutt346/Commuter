@@ -21,9 +21,9 @@ app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(express.static(path.join(__dirname, "../dist")));
 app.use(router);
+//Initialize passport
 app.use(session({ secret: "itsasecret" }));
 app.use(passport.initialize());
 app.use(passport.session());

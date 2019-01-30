@@ -37,7 +37,6 @@ module.exports = passport => {
               let newUserInfo = new userInfo();
               newUserInfo.email = email;
               newUserInfo.password = newUserInfo.generateHash(password);
-
               newUserInfo.save(err => {
                 if (err) throw err;
                 return done(null, newUserInfo);
@@ -61,17 +60,22 @@ module.exports = passport => {
       (req, email, password, done) => {
         userInfo.findOne({ email: email }, (err, user) => {
           if (err) return done(err);
-          // If no user found or password is invalid
-          if (!user)
+          // If no user found
+          else if (!user)
             return done(
               null,
               false,
               req.flash("loginMessage", "Email or password was incorrect.")
             );
-          if (!user.validPassword(password))
-            return done(null, false, console.log("Invalid Password"));
+          // Password is invalid
+          else if (!user.validPassword(password, user.password))
+            return done(
+              null,
+              false,
+              req.flash("loginMessage", "Email or password was incorrect")
+            );
           // Successful login
-          return done(null, user);
+          else return done(null, user);
         });
       }
     )

@@ -13,13 +13,11 @@ class LogIn extends React.Component {
   };
 
   handleSubmit = e => {
-    e.preventDefault();
     let { email, password } = this.state;
-    console.log(email, password);
-    // Axios.post("/LogIn", {
-    //   email: email,
-    //   password: password
-    // });
+    Axios.post("/LogIn", {
+      email: email,
+      password: password
+    }).catch(err => err);
   };
 
   render() {

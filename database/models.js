@@ -17,7 +17,7 @@ UsersSchema.methods.generateHash = password =>
   bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 
 // Check for valid password
-UsersSchema.methods.validPassword = password =>
-  bcrypt.compareSync(password, this.password);
+UsersSchema.methods.validPassword = (password, hash) =>
+  bcrypt.compareSync(password, hash);
 
 module.exports = mongoose.model("userInfo", UsersSchema);
