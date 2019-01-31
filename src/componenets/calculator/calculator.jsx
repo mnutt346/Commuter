@@ -3,7 +3,7 @@ import Form from "./form.jsx";
 import Commute from "./commute.jsx";
 import Axios from "axios";
 
-class Calculator extends React.Component {
+export default class Calculator extends React.Component {
   state = {
     origin: "",
     destination: "",
@@ -62,5 +62,3 @@ class Calculator extends React.Component {
     );
   }
 }
-
-export default Calculator;

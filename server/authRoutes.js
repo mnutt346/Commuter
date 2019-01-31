@@ -15,7 +15,13 @@ module.exports = (app, passport) => {
       failureFlash: true
     }),
     (req, res) => {
-      res.cookie(req.user.id, req.sessionID).redirect("/");
+      res
+        .cookie(req.user.id, req.sessionID)
+        .redirect("http://localhost:3001/#/MemberCalculator");
     }
   );
+
+  app.get("/user", (req, res) => {
+    console.log(req.sessionID);
+  });
 };
