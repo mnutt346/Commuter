@@ -198,6 +198,10 @@ button {
 
 /* < ------------------------- CALCULATOR ------------------------- */
 
+.sign-up-form {
+  height: 20%;
+}
+
 .sign-up-heading-containter {
   display: flex;
   justify-content: center;

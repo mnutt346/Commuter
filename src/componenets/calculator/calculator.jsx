@@ -34,6 +34,7 @@ class Calculator extends React.Component {
       departureTime,
       trafficModel
     } = this.state;
+
     Axios.post("/commute", {
       destination: destination,
       origin: origin,
@@ -42,6 +43,7 @@ class Calculator extends React.Component {
       trafficModel: trafficModel
     }).then(response => this.setState({ commuteTime: response.data }));
   };
+
 
   render() {
     return (
