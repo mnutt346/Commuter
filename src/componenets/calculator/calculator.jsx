@@ -44,7 +44,6 @@ class Calculator extends React.Component {
     }).then(response => this.setState({ commuteTime: response.data }));
   };
 
-
   render() {
     return (
       <div className="calculator-container">

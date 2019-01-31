@@ -3,7 +3,7 @@ module.exports = (app, passport) => {
     "/SignUp",
     passport.authenticate("local-signup", {
       successRedirect: "/",
-      failureRedirect: "/SignUp",
+      failureRedirect: "http://localhost:3001/#/SignUp",
       failureFlash: "Sorry, that email is already in use."
     })
   );
@@ -11,9 +11,11 @@ module.exports = (app, passport) => {
   app.post(
     "/LogIn",
     passport.authenticate("local-login", {
-      successRedirect: "/",
-      failureRedirect: "/LogIn",
+      failureRedirect: "http://localhost:3001/#/LogIn",
       failureFlash: true
-    })
+    }),
+    (req, res) => {
+      res.cookie(req.user.id, req.sessionID).redirect("/");
+    }
   );
 };
