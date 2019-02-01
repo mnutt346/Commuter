@@ -9,11 +9,6 @@ module.exports = {
     publicPath: "/dist/",
     historyApiFallback: true
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "./dist/index.html"
-    })
-  ],
   module: {
     rules: [
       {

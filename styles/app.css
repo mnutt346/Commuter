@@ -284,8 +284,17 @@ button {
   padding: 2%;
 }
 
-.my-commutes-form-header {
+.my-commutes-form-header-container {
+  display: flex;
+  justify-content: center;
   width: 100%;
+}
+
+.buttons-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  padding-bottom: 3%;
 }
 
 .my-commutes-form input[type="text"] {

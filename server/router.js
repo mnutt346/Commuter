@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const axios = require("axios");
+const Axios = require("axios");
 
 require("dotenv").config();
 
@@ -12,14 +12,13 @@ const convertTime = (date, time) => {
 };
 
 const getCommuteData = async queryString => {
-  return await axios
-    .get(queryString)
+  return await Axios.get(queryString)
     .then(response => {
       let commuteTime =
         response.data.routes[0].legs[0].duration_in_traffic.text;
       return commuteTime;
     })
-    .catch(err => console.log("Error in API request: ", err));
+    .catch(err => res.sendStatus(500));
 };
 
 router.post("/commute", async (req, res) => {

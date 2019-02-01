@@ -1,30 +1,119 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Axios from "axios";
 import { HashRouter, Switch, Route } from "react-router-dom";
 import Header from "./componenets/header.jsx";
 import Calculator from "./componenets/calculator/calculator.jsx";
-import MemberCalc from "./componenets/memberCalc/memberCalc.jsx";
+import MyCommutes from "./componenets/memberCalc/myCommutes.jsx";
 import SignUp from "./componenets/signup/signup.jsx";
 import LogIn from "./componenets/login/login.jsx";
 import "../styles/app.css";
 
-const App = () => (
-  <div className="app-container">
-    <div className="background">
-      <HashRouter>
-        <div className="router-container">
-          <Header />
-          <Switch>
-            <Route exact path="/" component={Calculator} />
-            <Route path="/SignUp" component={SignUp} />
-            <Route path="/LogIn" component={LogIn} />
-            <Route path="/MemberCalculator" component={MemberCalc} />
-          </Switch>
+class App extends React.Component {
+  state = {
+    origin: "",
+    destination: "",
+    departureDate: "",
+    departureTime: 0,
+    trafficModel: "best_guess",
+    commuteTime: null,
+    email: "",
+    password: "",
+    home: "",
+    work: ""
+  };
+
+  componentDidMount() {
+    console.log("HELLOOOO");
+  }
+
+  handleInput = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    let {
+      origin,
+      destination,
+      departureDate,
+      departureTime,
+      trafficModel
+    } = this.state;
+
+    Axios.post("/commute", {
+      destination: destination,
+      origin: origin,
+      departureDate: departureDate,
+      departureTime: departureTime,
+      trafficModel: trafficModel
+    }).then(response => this.setState({ commuteTime: response.data }));
+  };
+
+  handleLogin = e => {
+    let { email, password } = this.state;
+    Axios.post("/LogIn", {
+      email: email,
+      password: password
+    }).catch(err => err);
+  };
+
+  handleSetCommutes = e => {
+    e.preventDefault();
+    let { home, work } = this.state;
+    Axios.post("/MyCommutes", {
+      home: home,
+      work: work
+    }).then(response => console.log(response));
+  };
+
+  render() {
+    return (
+      <div className="app-container">
+        <div className="background">
+          <HashRouter>
+            <div className="router-container">
+              <Header />
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={() => (
+                    <Calculator
+                      isAuthenticated={document.cookie}
+                      handleChange={this.handleChange}
+                      handleInput={this.handleInput}
+                      handleSubmit={this.handleSubmit}
+                      commuteTime={this.state.commuteTime}
+                    />
+                  )}
+                />
+                <Route path="/SignUp" component={SignUp} />
+                <Route
+                  path="/LogIn"
+                  render={() => (
+                    <LogIn
+                      handleChange={this.handleChange}
+                      handleLogin={this.handleLogin}
+                    />
+                  )}
+                />
+              </Switch>
+            </div>
+          </HashRouter>
+          <div className="base-buffer" />
         </div>
-      </HashRouter>
-      <div className="base-buffer" />
-    </div>
-  </div>
-);
+      </div>
+    );
+  }
+}
 
 ReactDOM.render(<App />, document.getElementById("app"));

@@ -1,64 +1,47 @@
 import React from "react";
 import Form from "./form.jsx";
 import Commute from "./commute.jsx";
-import Axios from "axios";
+import MyCommutes from "../memberCalc/myCommutes.jsx";
 
-export default class Calculator extends React.Component {
-  state = {
-    origin: "",
-    destination: "",
-    departureDate: "",
-    departureTime: 0,
-    trafficModel: "best_guess",
-    commuteTime: null
-  };
-
-  handleInput = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    let {
-      origin,
-      destination,
-      departureDate,
-      departureTime,
-      trafficModel
-    } = this.state;
-
-    Axios.post("/commute", {
-      destination: destination,
-      origin: origin,
-      departureDate: departureDate,
-      departureTime: departureTime,
-      trafficModel: trafficModel
-    }).then(response => this.setState({ commuteTime: response.data }));
-  };
-
-  render() {
-    return (
-      <div className="calculator-container">
-        <Form
-          handleInput={this.handleInput}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
+const Calculator = props => {
+  let { isAuthenticated } = props;
+  return isAuthenticated ? (
+    <>
+      <div className="member-calc-container">
+        <MyCommutes
+          handleChange={props.handleChange}
+          handleSetCommutes={props.handleSetCommutes}
         />
-        <div className="commute-time-header-container">
-          <div className="commute-time-header">Estimated Commute Time</div>
-        </div>
-        <div className="commute-container">
-          <Commute commuteTime={this.state.commuteTime} />
+        <div className="calculator-container">
+          <Form
+            handleInput={props.handleInput}
+            handleChange={props.handleChange}
+            handleSubmit={props.handleSubmit}
+          />
+          <div className="commute-time-header-container">
+            <div className="commute-time-header">Estimated Commute Time</div>
+          </div>
+          <div className="commute-container">
+            <Commute commuteTime={props.commuteTime} />
+          </div>
         </div>
       </div>
-    );
-  }
-}
+    </>
+  ) : (
+    <div className="calculator-container">
+      <Form
+        handleInput={props.handleInput}
+        handleChange={props.handleChange}
+        handleSubmit={props.handleSubmit}
+      />
+      <div className="commute-time-header-container">
+        <div className="commute-time-header">Estimated Commute Time</div>
+      </div>
+      <div className="commute-container">
+        <Commute commuteTime={props.commuteTime} />
+      </div>
+    </div>
+  );
+};
+
+export default Calculator;
