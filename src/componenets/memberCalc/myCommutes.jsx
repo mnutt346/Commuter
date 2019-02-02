@@ -13,7 +13,7 @@ const MyCommutes = props => (
           </button>
         </div>
         <div className="button-container">
-          <button name="workCommute" onClick={props.handleSubmit}>
+          <button name="workCommute" onClick={props.handleWorkClick}>
             To Work
           </button>
         </div>

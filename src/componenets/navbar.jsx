@@ -5,7 +5,7 @@ const Navbar = props => {
   return props.isAuthenticated ? (
     <div className="nav-container">
       <Link to="/">Home</Link>
-      <a>Log Out</a>
+      <a onClick={props.handleLogout}>Log Out</a>
     </div>
   ) : (
     <div className="nav-container">

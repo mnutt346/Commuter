@@ -27,9 +27,14 @@ module.exports = (app, passport) => {
   // Set user's commutes
   app.post("/MyCommutes", (req, res) => {
     let userID = req.user.id;
-    let { home, work } = req.body;
+    let { home, work, homeCommuteTime, workCommuteTime } = req.body;
     let query = { _id: userID };
-    let update = { home: home, work: work };
+    let update = {
+      home: home,
+      work: work,
+      homeCommuteTime: homeCommuteTime,
+      workCommuteTime: workCommuteTime
+    };
     userInfo.findOneAndUpdate(
       query,
       update,
@@ -43,9 +48,13 @@ module.exports = (app, passport) => {
 
   app.get("/userInfo", (req, res) => {
     let id = req.user.id;
-    userInfo.findById(id, "home work", (err, response) => {
-      if (err) res.sendStatus(500);
-      res.send(response);
-    });
+    userInfo.findById(
+      id,
+      "home work homeCommuteTime workCommuteTime",
+      (err, response) => {
+        if (err) res.sendStatus(500);
+        res.send(response);
+      }
+    );
   });
 };

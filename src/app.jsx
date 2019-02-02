@@ -32,8 +32,13 @@ class App extends React.Component {
     });
     if (this.isAuthenticated) {
       Axios.get("/userInfo").then(response => {
-        let { home, work } = response.data;
-        return this.setState({ home: home, work: work });
+        let { home, work, homeCommuteTime, workCommuteTime } = response.data;
+        return this.setState({
+          home: home,
+          work: work,
+          homeCommuteTime: homeCommuteTime,
+          workCommuteTime: workCommuteTime
+        });
       });
     }
   }
@@ -89,10 +94,12 @@ class App extends React.Component {
 
   handleSetCommutes = e => {
     e.preventDefault();
-    let { home, work } = this.state;
+    let { home, work, homeCommuteTime, workCommuteTime } = this.state;
     Axios.post("/MyCommutes", {
       home: home,
-      work: work
+      work: work,
+      homeCommuteTime: homeCommuteTime,
+      workCommuteTime: workCommuteTime
     }).catch(err => err);
   };
 
@@ -104,7 +111,28 @@ class App extends React.Component {
       work: work,
       homeCommuteTime: homeCommuteTime,
       trafficModel: "best_guess"
-    }).then(response => this.setState({ commuteTime: response.data }));
+    }).then(response => {
+      console.log(response);
+      this.setState({ commuteTime: response.data });
+    });
+  };
+
+  handleWorkClick = e => {
+    e.preventDefault();
+    let { home, work, workCommuteTime } = this.state;
+    Axios.post("/commuteWork", {
+      home: home,
+      work: work,
+      workCommuteTime: workCommuteTime,
+      trafficModel: "best_guess"
+    }).then(response => {
+      console.log(response);
+      this.setState({ commuteTime: response.data });
+    });
+  };
+
+  handleLogout = e => {
+    this.setState({ isAuthenticated: false });
   };
 
   render() {
@@ -127,7 +155,11 @@ class App extends React.Component {
                       commuteTime={this.state.commuteTime}
                       home={this.state.home}
                       work={this.state.work}
+                      homeCommuteTime={this.state.homeCommuteTime}
+                      workCommuteTime={this.state.workCommuteTime}
                       handleHomeClick={this.handleHomeClick}
+                      handleWorkClick={this.handleWorkClick}
+                      handleSetCommutes={this.handleSetCommutes}
                     />
                   )}
                 />

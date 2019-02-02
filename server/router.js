@@ -18,7 +18,7 @@ const getCommuteData = async queryString => {
         response.data.routes[0].legs[0].duration_in_traffic.text;
       return commuteTime;
     })
-    .catch(err => res.sendStatus(500));
+    .catch(err => err);
 };
 
 router.post("/commute", async (req, res) => {
@@ -38,9 +38,9 @@ router.post("/commute", async (req, res) => {
   });
 });
 
-// ---------------------------- POST COMMUTE HOME ----------------------------
+// ---------------------------- CONVERT MY COMMUTE TIMES ----------------------------
 
-const convertHomeCommute = time => {
+const convertMyCommute = time => {
   let today = new Date();
   let day = today.getDate();
   let month = today.getMonth() + 1;
@@ -51,13 +51,30 @@ const convertHomeCommute = time => {
   return unixTime;
 };
 
+// ---------------------------- POST COMMUTE HOME ----------------------------
+
 router.post("/commuteHome", async (req, res) => {
   let { home, work, homeCommuteTime, trafficModel } = req.body;
-  let homeUnixTime = convertHomeCommute(homeCommuteTime);
+  let homeUnixTime = convertMyCommute(homeCommuteTime);
   let APIString = `https://maps.googleapis.com/maps/api/directions/json?origin=${work}&destination=${home}&departure_time=${homeUnixTime}&traffic_model=${trafficModel}&key=${
     process.env.API_KEY
   }`;
 
+  await getCommuteData(APIString).then(commuteTime => {
+    res.send(commuteTime);
+  });
+});
+
+// ---------------------------- POST COMMUTE WORK ----------------------------
+
+router.post("/commuteWork", async (req, res) => {
+  let { home, work, workCommuteTime, trafficModel } = req.body;
+  let workUnixTime = convertMyCommute(workCommuteTime);
+  if (workUnixTime < new Date()) workUnixTime += 86400000;
+
+  let APIString = `https://maps.googleapis.com/maps/api/directions/json?origin=${home}&destination=${work}&departure_time=${workUnixTime}&traffic_model=${trafficModel}&key=${
+    process.env.API_KEY
+  }`;
   await getCommuteData(APIString).then(commuteTime => {
     res.send(commuteTime);
   });

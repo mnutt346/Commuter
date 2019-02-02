@@ -10,10 +10,13 @@ const Calculator = props => {
       <div className="member-calc-container">
         <MyCommutes
           handleChange={props.handleChange}
-          handleSetCommutes={props.handleSetCommutes}
           home={props.home}
+          homeCommuteTime={props.homeCommuteTime}
+          workCommuteTime={props.workCommuteTime}
           work={props.work}
           handleHomeClick={props.handleHomeClick}
+          handleWorkClick={props.handleWorkClick}
+          handleSetCommutes={props.handleSetCommutes}
         />
         <div className="calculator-container">
           <Form

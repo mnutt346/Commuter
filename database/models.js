@@ -7,7 +7,9 @@ const UsersSchema = new mongoose.Schema(
     email: String,
     password: String,
     home: String,
-    work: String
+    work: String,
+    homeCommuteTime: String,
+    workCommuteTime: String
   },
   { collection: "userInfo" }
 );
