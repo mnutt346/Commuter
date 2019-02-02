@@ -13,6 +13,7 @@ const Calculator = props => {
           handleSetCommutes={props.handleSetCommutes}
           home={props.home}
           work={props.work}
+          handleHomeClick={props.handleHomeClick}
         />
         <div className="calculator-container">
           <Form

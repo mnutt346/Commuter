@@ -8,7 +8,7 @@ const MyCommutes = props => (
       </div>
       <div className="buttons-container">
         <div className="button-container">
-          <button name="homeCommute" onClick={props.handleSubmit}>
+          <button name="homeCommute" onClick={props.handleHomeClick}>
             To Home
           </button>
         </div>
@@ -25,6 +25,7 @@ const MyCommutes = props => (
         onChange={props.handleChange}
         value={props.home}
       />
+      <input type="time" name="homeCommuteTime" onChange={props.handleChange} />
       Work:{" "}
       <input
         type="text"
@@ -32,6 +33,7 @@ const MyCommutes = props => (
         onChange={props.handleChange}
         value={props.work}
       />
+      <input type="time" name="workCommuteTime" onChange={props.handleChange} />
       <div className="button-container">
         <button name="submitButton" onClick={props.handleSetCommutes}>
           Set My Commutes

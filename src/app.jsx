@@ -19,7 +19,9 @@ class App extends React.Component {
     email: "",
     password: "",
     home: "",
-    work: ""
+    work: "",
+    homeCommuteTime: "",
+    workCommuteTime: ""
   };
 
   isAuthenticated = document.cookie.includes("session");
@@ -91,17 +93,18 @@ class App extends React.Component {
     Axios.post("/MyCommutes", {
       home: home,
       work: work
-    }).then(response => console.log(response));
+    }).catch(err => err);
   };
 
   handleHomeClick = e => {
     e.preventDefault();
-    let { home, work } = this.state;
+    let { home, work, homeCommuteTime } = this.state;
     Axios.post("/commuteHome", {
-      destination: home,
-      origin: work,
+      home: home,
+      work: work,
+      homeCommuteTime: homeCommuteTime,
       trafficModel: "best_guess"
-    }).then(response => console.log(response));
+    }).then(response => this.setState({ commuteTime: response.data }));
   };
 
   render() {
@@ -124,6 +127,7 @@ class App extends React.Component {
                       commuteTime={this.state.commuteTime}
                       home={this.state.home}
                       work={this.state.work}
+                      handleHomeClick={this.handleHomeClick}
                     />
                   )}
                 />

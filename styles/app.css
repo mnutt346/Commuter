@@ -56,6 +56,7 @@ input:-webkit-autofill:active {
 .nav-container a:hover {
   transform: scale(1.1);
   transition: 0.3s;
+  cursor: pointer;
 }
 
 /* -------------------- APP -------------------- */
@@ -133,6 +134,10 @@ input {
   border-top: none;
   border-bottom: 1px solid #ddd;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff, 0 1px 0 #fff;
+}
+
+input[type="text"] {
+  width: 8vw;
 }
 
 .origin-destination-container {
@@ -244,7 +249,7 @@ button {
   width: 100%;
 }
 
-/* < ------------------------- MEMBER CALC ------------------------- */
+/* < ------------------------- MY COMMUTES ------------------------- */
 
 .member-calc-container {
   display: flex;
@@ -298,5 +303,9 @@ button {
 }
 
 .my-commutes-form input[type="text"] {
-  width: 70%;
+  width: 14vw;
+}
+
+.my-commutes-form input[type="time"] {
+  width: 4vw;
 }
