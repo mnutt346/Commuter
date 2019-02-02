@@ -4,7 +4,6 @@ import Axios from "axios";
 import { HashRouter, Switch, Route } from "react-router-dom";
 import Header from "./componenets/header.jsx";
 import Calculator from "./componenets/calculator/calculator.jsx";
-import MyCommutes from "./componenets/memberCalc/myCommutes.jsx";
 import SignUp from "./componenets/signup/signup.jsx";
 import LogIn from "./componenets/login/login.jsx";
 import "../styles/app.css";
@@ -23,9 +22,29 @@ class App extends React.Component {
     work: ""
   };
 
+  isAuthenticated = document.cookie.includes("session");
+
   componentDidMount() {
-    console.log("HELLOOOO");
+    window.addEventListener("beforeunload", () => {
+      this.deleteCookies();
+    });
+    if (this.isAuthenticated) {
+      Axios.get("/userInfo").then(response => {
+        let { home, work } = response.data;
+        return this.setState({ home: home, work: work });
+      });
+    }
   }
+
+  deleteCookies = () => {
+    let cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i];
+      let eqPos = cookie.indexOf("=");
+      let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+  };
 
   handleInput = e => {
     this.setState({
@@ -75,24 +94,36 @@ class App extends React.Component {
     }).then(response => console.log(response));
   };
 
+  handleHomeClick = e => {
+    e.preventDefault();
+    let { home, work } = this.state;
+    Axios.post("/commuteHome", {
+      destination: home,
+      origin: work,
+      trafficModel: "best_guess"
+    }).then(response => console.log(response));
+  };
+
   render() {
     return (
       <div className="app-container">
         <div className="background">
           <HashRouter>
             <div className="router-container">
-              <Header />
+              <Header isAuthenticated={this.isAuthenticated} />
               <Switch>
                 <Route
                   exact
                   path="/"
                   render={() => (
                     <Calculator
-                      isAuthenticated={document.cookie}
+                      isAuthenticated={this.isAuthenticated}
                       handleChange={this.handleChange}
                       handleInput={this.handleInput}
                       handleSubmit={this.handleSubmit}
                       commuteTime={this.state.commuteTime}
+                      home={this.state.home}
+                      work={this.state.work}
                     />
                   )}
                 />

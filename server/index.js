@@ -10,12 +10,10 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const flash = require("connect-flash");
 const uuid = require("uuid");
-const FileStore = require("session-file-store")(session);
 
-mongoose.connect(
-  "mongodb://localhost:27017/Commuter",
-  { useNewUrlParser: true }
-);
+mongoose.connect("mongodb://localhost:27017/Commuter", {
+  useNewUrlParser: true
+});
 
 require("../config/passport.js")(passport);
 
@@ -29,7 +27,6 @@ app.use(router);
 app.use(
   session({
     genid: req => uuid(),
-    store: new FileStore({ path: "../sessions/" }),
     secret: "itsasecret",
     resave: false,
     saveUninitialized: false

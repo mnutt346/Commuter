@@ -20,7 +20,7 @@ module.exports = (app, passport) => {
     }),
     (req, res) => {
       userID = req.user.id;
-      res.cookie(req.user.id, req.sessionID).redirect("/");
+      res.cookie("session", req.sessionID).redirect("/");
     }
   );
 
@@ -42,6 +42,10 @@ module.exports = (app, passport) => {
   });
 
   app.get("/userInfo", (req, res) => {
-    console.log("HELLOOOO");
+    let id = req.user.id;
+    userInfo.findById(id, "home work", (err, response) => {
+      if (err) res.sendStatus(500);
+      res.send(response);
+    });
   });
 };

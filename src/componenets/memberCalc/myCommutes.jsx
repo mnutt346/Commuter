@@ -18,8 +18,20 @@ const MyCommutes = props => (
           </button>
         </div>
       </div>
-      Home: <input type="text" name="home" onChange={props.handleChange} />
-      Work: <input type="text" name="work" onChange={props.handleChange} />
+      Home:{" "}
+      <input
+        type="text"
+        name="home"
+        onChange={props.handleChange}
+        value={props.home}
+      />
+      Work:{" "}
+      <input
+        type="text"
+        name="work"
+        onChange={props.handleChange}
+        value={props.work}
+      />
       <div className="button-container">
         <button name="submitButton" onClick={props.handleSetCommutes}>
           Set My Commutes

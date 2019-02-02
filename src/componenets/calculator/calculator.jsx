@@ -11,6 +11,8 @@ const Calculator = props => {
         <MyCommutes
           handleChange={props.handleChange}
           handleSetCommutes={props.handleSetCommutes}
+          home={props.home}
+          work={props.work}
         />
         <div className="calculator-container">
           <Form
