@@ -132,7 +132,7 @@ class App extends React.Component {
   };
 
   handleLogout = e => {
-    this.setState({ isAuthenticated: false });
+    location.reload();
   };
 
   render() {
@@ -141,7 +141,10 @@ class App extends React.Component {
         <div className="background">
           <HashRouter>
             <div className="router-container">
-              <Header isAuthenticated={this.isAuthenticated} />
+              <Header
+                isAuthenticated={this.isAuthenticated}
+                handleLogout={this.handleLogout}
+              />
               <Switch>
                 <Route
                   exact
