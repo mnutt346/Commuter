@@ -5,10 +5,13 @@ module.exports = (app, passport) => {
   app.post(
     "/SignUp",
     passport.authenticate("local-signup", {
-      successRedirect: "/",
       failureRedirect: "http://localhost:3001/#/SignUp",
       failureFlash: "Sorry, that email is already in use."
-    })
+    }),
+    (req, res) => {
+      userID = req.user.id;
+      res.cookie("session", req.sessionID).redirect("/");
+    }
   );
 
   // Log User In
