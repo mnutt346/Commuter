@@ -5,6 +5,7 @@ body {
   margin: 0px;
   padding: 0px;
   border: 0px;
+  background-color: grey;
 }
 
 input:-webkit-autofill,
@@ -138,6 +139,19 @@ input {
 
 input[type="text"] {
   width: 8vw;
+  height: 1.5vw;
+}
+
+input[type="date"],
+input[type="time"] {
+  width: 7vw;
+  height: 1.5vw;
+}
+
+input[type="radio"] {
+  width: 0.5vw;
+  height: 0.5vw;
+  padding-right: 1%;
 }
 
 .origin-destination-container {
@@ -145,6 +159,11 @@ input[type="text"] {
   justify-content: center;
   width: 100%;
   font-size: 1.4vw;
+}
+
+label {
+  padding-left: 1%;
+  padding-right: 1%;
 }
 
 .date-time-container {
@@ -212,6 +231,12 @@ button {
   height: 20%;
 }
 
+.sign-up-form input[type="submit"] {
+  width: 8vw;
+  height: 2vw;
+  font-size: 1.4vw;
+}
+
 .sign-up-heading-containter {
   display: flex;
   justify-content: center;
@@ -226,6 +251,17 @@ button {
 
 .log-in-form {
   height: 20%;
+}
+
+.log-in-form input[type="submit"] {
+  width: 8vw;
+  height: 2vw;
+  font-size: 1.4vw;
+}
+
+input[type="password"] {
+  width: 8vw;
+  height: 1.6vw;
 }
 
 .log-in-heading-containter {
@@ -253,8 +289,8 @@ button {
 
 .member-calc-container {
   display: flex;
-  height: 65vw;
-  width: 45vw;
+  height: 70vw;
+  width: 50vw;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -264,8 +300,8 @@ button {
 .my-commutes-container {
   display: flex;
   flex-wrap: wrap;
-  height: 17vw;
-  width: 30vw;
+  height: 23vw;
+  width: 32vw;
   justify-content: center;
   align-items: center;
   align-self: center;
@@ -292,14 +328,30 @@ button {
 .my-commutes-form-header-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
+  height: 15%;
 }
 
 .buttons-container {
   display: flex;
   width: 100%;
+  height: 15%;
   justify-content: space-evenly;
-  padding-bottom: 3%;
+  align-items: center;
+}
+
+.my-commute-button-container {
+  height: 100%;
+  width: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.my-commute-button-container:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
 }
 
 .my-commutes-form input[type="text"] {
@@ -307,5 +359,15 @@ button {
 }
 
 .my-commutes-form input[type="time"] {
-  width: 4vw;
+  width: 5vw;
+}
+
+.my-commutes-form .button-container {
+  height: 15%;
+  width: 35%;
+}
+
+.button-container button {
+  width: 95%;
+  height: 95%;
 }

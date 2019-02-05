@@ -7,12 +7,12 @@ const MyCommutes = props => (
         <p className="my-commutes-form-header">My Commutes</p>
       </div>
       <div className="buttons-container">
-        <div className="button-container">
+        <div className="my-commute-button-container">
           <button name="homeCommute" onClick={props.handleHomeClick}>
             To Home
           </button>
         </div>
-        <div className="button-container">
+        <div className="my-commute-button-container">
           <button name="workCommute" onClick={props.handleWorkClick}>
             To Work
           </button>
