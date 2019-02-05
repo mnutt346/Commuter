@@ -11,7 +11,7 @@ const passport = require("passport");
 const flash = require("connect-flash");
 const uuid = require("uuid");
 
-mongoose.connect("mongodb://localhost:27017/Commuter", {
+mongoose.connect("mongodb://mongo:27017/Commuter", {
   useNewUrlParser: true
 });
 
